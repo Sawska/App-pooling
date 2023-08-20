@@ -13,8 +13,14 @@ app.get("/", (req, res) => {
     res.send("Hi");
 });
 
-app.listen(process.env.SERVER_PORT, process.env.SERVER_HOST, () => {
-    console.log(`Server is running on http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}`);
-});
+
+if (require.main === module) {
+    app.listen(process.env.SERVER_PORT, process.env.SERVER_HOST, () => {
+      console.log(`Server is running on http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}`);
+    });
+  }
+  
+  module.exports = app;
+  
 
 module.exports = app
