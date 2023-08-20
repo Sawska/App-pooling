@@ -23,6 +23,3 @@ jobs:
 
     - name: Run Tests
       run: npm test
-
-    - name: Deploy to Production
-      run: npm deploy

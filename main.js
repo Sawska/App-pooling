@@ -16,3 +16,5 @@ app.get("/", (req, res) => {
 app.listen(process.env.SERVER_PORT, process.env.SERVER_HOST, () => {
     console.log(`Server is running on http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}`);
 });
+
+module.exports = app
