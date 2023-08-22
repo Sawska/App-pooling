@@ -1,4 +1,4 @@
-connection = require("./connect")
+const connection = require("../connect")
 const dotenv = require("dotenv")
 dotenv.config()
 const table = process.env.DB_TABLE

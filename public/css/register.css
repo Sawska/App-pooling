@@ -1,0 +1,90 @@
+body {
+    background-color: whitesmoke;
+}
+
+
+.LogoName {
+    margin-left: 100px;
+}
+
+.logo  {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 15px;
+}
+
+.link {
+    text-decoration: none;
+    font-family: 'Roboto Condensed',sans-serif;
+    color: #1B1212;
+}
+
+.link:hover {
+    text-decoration: none;
+    color: #1B1212;
+}
+
+.Name {
+ font-size: 35px;
+ text-decoration: none;
+ font-family: 'Roboto Condensed',sans-serif;
+ color: 1B1212;
+}
+
+.mrgFirst {
+    margin-left: 50px;
+}
+
+.mgA {
+    margin-left: 20px;
+}
+
+.createPool {
+    font-family: 'Roboto Condensed',sans-serif;
+}
+
+.createPool:hover {
+    border-bottom: 2px solid #E0E0E0;
+    padding-bottom: 22px;
+}
+
+.LgButton {
+    border: 1px solid #BA55D3;
+    border-radius: 5px;
+    background-color: #BA55D3;
+    transition: background-color 0.3s ease; /* Add a transition effect to smoothly change the background color */
+}
+
+
+
+.LgButton:hover {
+    border-color: #8A2BE2;
+    background-color: #8A2BE2;
+}
+
+.RgButton {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.RgButton:hover > a {
+    color: #8A2BE2;
+}
+
+
+.mainTheme {
+    margin-top: 50px;
+    margin-left: 100px;
+    background-color: white;
+    border-radius: 10px;
+    width: 550px;
+}
+
+.marg {
+    margin-top: 50px;
+}
+
+
+.errText {
+    color: red;
+}

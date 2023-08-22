@@ -21,5 +21,15 @@ function endPool(pool) {
     })
 }
 
+function createPoolUser() {
+    return new Pool({
+        user: process.env.DB_USER,
+        host: process.env.DB_HOST,
+        database: process.env.DB_FOR_USER,
+        password: process.env.DB_PASSWORD,
+        port: DB_PORT,
+    })
+}
 
-module.exports = createPool,endPool;
+
+module.exports = createPool,endPool,createPoolUser;
