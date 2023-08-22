@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="form-outline mb-4">
-                  <input type="email" id="form3Example3cg" class="form-control form-control-lg" name="email" required/>
+                  <input type="email" id="form3Example3cg" class="form-control form-control-lg" name="email"/>
                   <label class="form-label" for="form3Example3cg">Your Email</label>
                 </div>
 
@@ -57,13 +57,13 @@
                 
 
                 <div class="d-flex justify-content-center">
-                  <button type="button"
+                  <button type="submit"
                     class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
                 </div>
 
 
                   <% for(let i = 0;i<errText.length;i++) {%>
-                    <p class="text-center text-muted mt-5 mb-0 errText"> <a class="fw-bold text-body"><%= errText[i] %></a></p>
+                    <p class="text-center errText"> <%= errText[i] %></p>
                     <% } %>
 
                 <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login"

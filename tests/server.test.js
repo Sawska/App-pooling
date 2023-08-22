@@ -1,4 +1,5 @@
 const request = require('supertest');
+const registerLogin = require("../registerLoginErr")
 const app = require('../main');  // Adjust the path to your main.js
 
 describe('Server Tests', () => {
@@ -23,3 +24,4 @@ describe('Server Tests', () => {
   })
 
 });
+

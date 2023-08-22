@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap">
+    <link rel="stylesheet" href="/css/demo.css">
+    <script src="/js/demo.js"></script>
+    <title>Demo</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-white">
+        <div class="LogoName">
+                <img src="/img/Logo_vote.svg" class="logo">
+                <a class="Name link" href="/">Vote Up</a>
+                <a class=" mrgFirst createPool link" href="/createPool">Create Pool</a>
+                <a class="mgA createPool link" href="/demo">Demo</a>
+                <a class="mgA createPool link" href="/deletePool">Delete Pool</a>
+        </div>
+        <div>
+        <button class="RgButton"><a class="link" href="/register">Register</a></button>
+        <button class="LgButton"><a class="link" href="/login">Login</a></button>
+        </div>
+      </nav>
+        <div class="wrapper">
+            <div class="mainTheme">
+                <h1>Do you like my app</h1>
+                <h5 class="choice">Make choices:</h5>
+                <form class="votingPoll">
+                    <div class="option" id="1">
+                        <label for="option1" class="optionLabel">
+                            <input type="radio" id="option1" name="vote" class="InputRadio">
+                            <span class="CustomRadio"></span>
+                            <p class="Checkmark">Yes</p>
+                        </label>
+                    </div>
+                    <div class="option" id="2">
+                        <label for="option2" class="optionLabel">
+                            <input type="radio" id="option2" name="vote" class="InputRadio" checked>
+                            <span class="CustomRadio"></span>
+                            <p class="Checkmark">Maybe</p>
+                        </label>
+                    </div>
+                    <div class="option" id="3">
+                        <label for="option3" class="optionLabel">
+                            <input type="radio" id="option3" name="vote" class="InputRadio">
+                            <span class="CustomRadio"></span>
+                            <p class="Checkmark">No</p>
+                        </label>
+                    </div>
+                    <h5 class="choice">Update your vote or add a new vote.</h5>
+                    <div>
+                        <button class="LgButton"><a class="link" href="/VoteDemo">Vote</a></button>
+                        <button class="LgButton">Show result<a href="/showResultsDemo"></a></button>
+                     </div>
+                </form>
+            </div>
+            
+        </div>    
+</body>
+</html>

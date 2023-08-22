@@ -64,6 +64,7 @@ app.post("/login",async (req,res) => {
   const email = req.body.email
 
   let  {isPassed,errText} = await registerLogin.checkLogin(email,password)
+  
 
   if(isPassed) {
     res.render("main")

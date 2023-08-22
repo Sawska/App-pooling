@@ -5,7 +5,7 @@ function hash(password) {
     return new Promise((resolve,reject) => {
         bcrypt.hash(password,saltRound,(err,hashedPassword) => {
             if(err) reject(err);
-            resolve(result)
+            resolve(hashedPassword)
         })
     })
 }
@@ -19,4 +19,7 @@ function compare(userProvidedPassword,storedHashedPassword) {
     })
 }
 
-module.exports = hash,compare
+module.exports =  {
+    hash,
+    compare
+}

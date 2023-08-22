@@ -51,14 +51,12 @@
                 
 
                 <div class="d-flex justify-content-center">
-                  <button type="button"
+                  <button type="submit"
                     class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Login</button>
                 </div>
 
-                <% for (let i = 0; i < errText.length - 2; i++) { %>
-                  <p class="text-center text-muted mt-5 mb-0 errText">
-                    <a class="fw-bold text-body"><%= errText[i] %></a>
-                  </p>
+                <% if(errText.length >= 1) { %>
+                  <p class="text-center   mt-5 mb-0 errText"><%= errText[0] %> </p>
                 <% } %>
                 
                 
