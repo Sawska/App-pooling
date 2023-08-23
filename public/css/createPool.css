@@ -50,8 +50,8 @@ body {
 
 .LgButton {
     border: 1px solid #BA55D3;
-    border-radius: 5px;
-    font-size: 20px;
+    border-radius: 10px;
+    font-size: 15px;
     margin-left: 10px;
     background-color: #BA55D3;
     transition: background-color 0.3s ease; /* Add a transition effect to smoothly change the background color */
@@ -78,14 +78,9 @@ body {
     margin-top: 50px;
     margin-left: 450px;
     background-color: white;
-    border-radius: 10px;
-    padding-bottom: 50px;
+    /* border-radius: 10px; */
     width: 550px;
     height: 300px;
-}
-
-.choice {
-    margin-left: 10px;
 }
 
 .mainTheme > h1 {
@@ -143,7 +138,7 @@ body {
 
 
 .mainTheme {
-    /* text-align: center; */
+    border-radius: 10px;
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 25px;
     height: auto;
@@ -154,7 +149,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 20px;
+    height: auto;
 }
 
 .option {
@@ -205,3 +200,86 @@ body {
 .choice {
     font-size: 20px;
 }
+
+.labelText {
+    margin-left: 20px;
+    font-size: 15px;
+}
+
+.labelTextAnswer {
+    margin-bottom: 5px;
+}
+
+.labelTextTitle {
+    margin-top: 30px;
+}
+
+.InputFirst {
+    padding-left: 10px;
+    margin-left: 20px;
+    font-size: 15px;
+    width: 500px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ccc; 
+    transition: border-color 0.3s;
+}
+
+.InputFirst:focus {
+    border-color: #8A2BE2; 
+    outline: none; 
+}
+
+.Input {
+    padding-left: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+    font-size: 15px;
+    width: 500px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #ccc; 
+    transition: border-color 0.3s;
+}
+
+.Input:focus {
+    border-color: #8A2BE2; 
+    outline: none; 
+}
+
+.InputTitle {
+    padding-left: 10px;
+    margin-left: 20px;
+    font-size: 15px;
+    width: 500px;
+    height: 50px;
+    border-radius: 5px;
+    border: 1px solid #ccc; 
+    transition: border-color 0.3s;
+}
+
+
+.InputTitle:focus {
+    border-color: #8A2BE2; 
+    outline: none; 
+}
+
+
+.choose {
+    position: relative;
+    display: inline-block;
+  }
+
+  .Input {
+    padding-right: 25px; /* Add space for the image */
+  }
+
+  .remove-button {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }

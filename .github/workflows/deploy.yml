@@ -3,11 +3,25 @@ name: Node.js CI/CD
 on:
   push:
     branches:
-      - main  # Or your preferred branch
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          DB_HOST: localhost
+          DB_PORT:  3006
+          DB_USER: postgres
+          DB_PASSWORD: AlexLinov
+          DB: PoolingObjects
+          DB_TABLE: PoolingObjects
+          DB_TABLE_USER: users
+        ports:
+          - "3006:3006"  # Map container port to host port
 
     steps:
     - name: Checkout Repository
@@ -16,7 +30,7 @@ jobs:
     - name: Set Up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: 14  # Use the version you need
+        node-version: 14
 
     - name: Install Dependencies
       run: npm install

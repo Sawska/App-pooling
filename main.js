@@ -2,9 +2,18 @@ const express = require("express");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser")
 const registerLogin = require("./registerLoginErr")
+const dbOperationsUser = require("./dbOperations/dbOperationsUser")
+const session  = require("express-session")
 const app = express();
 
 dotenv.config();
+
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true
+
+}))
 
 app.use(express.static("public"));
 
@@ -16,16 +25,17 @@ app.use(bodyParser.json())
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
+  if(req.session.username == undefined) {
     res.render("main");
+  }  
+  else res.render("dashboard")
 });
 
 app.get("/createPool",(req,res) => {
     res.render("createPool")
 })
 
-app.get("/deletePool",(req,res) => {
-    res.render("deletePool")
-})
+
 
 app.get("/demo",(req,res) => {
     res.render("demo")
@@ -52,7 +62,9 @@ app.post("/register",async (req,res) => {
 
     if(isPassed)  {
       await registerLogin.registerUser(username,password,email)
-      res.render("main")
+      req.session.username = username
+      req.session.email = email
+      res.redirect("/")
     } else  {
       res.render("register",{errText})
     }
@@ -64,14 +76,28 @@ app.post("/login",async (req,res) => {
   const email = req.body.email
 
   let  {isPassed,errText} = await registerLogin.checkLogin(email,password)
-  
+
 
   if(isPassed) {
-    res.render("main")
+    req.session.email = email
+    req.session.username = await dbOperationsUser.getUsername(email)
+    res.redirect("/")
   } else {
     res.render("login",{errText})
   }
 })
+
+
+app.get("/logout", (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      console.error('Error destroying session:', err);
+    } else {
+      res.redirect("/");
+    }
+  });
+});
+
 
 
 

@@ -55,6 +55,10 @@ body {
     transition: background-color 0.3s ease; /* Add a transition effect to smoothly change the background color */
 }
 
+.LgButton > a {
+    font-size: 16px;
+}
+
 
 
 .LgButton:hover {
@@ -75,9 +79,8 @@ body {
 .mainTheme {
     margin-top: 50px;
     margin-left: 100px;
-    /* background-color: white; */
-    /* border-radius: 10px; */
-    width: 550px;
+    border-radius: 10px;
+    
 }
 
 .mainTheme > h1 {
@@ -115,17 +118,20 @@ body {
 
 
 .wrapper {
-    display: grid;
-    grid-template-columns: 650px 700px;
-  }
-
-.secondTheme {
-    /* background-color: white; */
+    background-color: #E5E4E2;
     border-radius: 10px;
     margin-top: 50px;
-    margin-bottom: 100px;
-    margin-left: 350px;
-    width: 700px;
+    padding-bottom: 50px;
+    width: auto;
+    display: grid;
+    grid-template-columns: 650px 700px;
+}
+
+
+
+.image {
+    width: 40px;
+    height: 40px;
 }
 
 .secondTheme > h1 {
@@ -142,9 +148,20 @@ body {
 }
 
 
+
+.Date {
+    font-size: 12px;
+}
+
+
 .secondPartText {
     color: #36454F;
 }
+
+
+
+
+
 
 .txtColor {
     color: #1B1212;
@@ -160,5 +177,78 @@ body {
 
 .PaddingButton {
     margin-left: 150px;
+}
+
+
+.name {
+    margin-right: 50px;
+}
+
+
+.secondTheme {
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 80px;
+    width: 1100px;
+    padding: 20px;
+}
+
+.image {
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+
+.imageDots {
+    /* width: 40px;
+    height: 40px; */
+    margin-left: 920px;
+    
+}
+
+.dots-icon {
+    font-size: 24px;
+}
+.dots-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.imageDots {
+    font-size: 24px;
+    /* cursor: pointer; */
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #333;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dots-icon:hover .dropdown-content {
+    display: block;
+}
+
+
+.text {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
 }
 

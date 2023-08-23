@@ -1,4 +1,5 @@
 const registerLogin = require("../registerLoginErr")
+const dbOperationsUser = require("../dbOperations/dbOperationsUser")
 describe("CheckRegister function", () => {
     it("Passed test", async () => {
         const {isPassed, errText} = await registerLogin.checkRegister("1234", "1234", "Splay1222@gmail.com");
@@ -69,5 +70,11 @@ describe("checkLogin",() => {
     let {isPassed,errText} = await registerLogin.checkLogin("Splay1494@gmail","Splay1")
     expect(isPassed).toBe(false)
     expect(errText[0]).toBe("Email or password is wrong")
+  })
+
+  it("helper function for login",async () => {
+    let email = await dbOperationsUser.getUsername("Splay1494@gmail.com")
+
+    expect(email).toBe("Splay")
   })
 })

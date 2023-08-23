@@ -9,9 +9,8 @@ describe('Server Tests', () => {
     '/',
     '/createPool',
     '/demo',
-    '/deletePool',
     '/register',
-    '/login'
+    '/login',
   ]
 
   routesToTest.forEach((route) => {
