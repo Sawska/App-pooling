@@ -27,18 +27,22 @@ app.set("view engine", "ejs");
 app.get("/", (req, res) => {
   if(req.session.username == undefined) {
     res.render("main");
-  }  
-  else res.render("dashboard")
+  }  else {
+    const username = req.session.username
+   res.render("dashboard",{username})
+  }
 });
 
 app.get("/createPool",(req,res) => {
-    res.render("createPool")
+  const username = req.session.username || ""
+    res.render("createPool", {username})
 })
 
 
 
 app.get("/demo",(req,res) => {
-    res.render("demo")
+  const username = req.session.username || ""
+    res.render("demo", {username})
 })
 
 app.get("/register",(req,res) => {

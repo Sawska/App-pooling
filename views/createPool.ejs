@@ -18,24 +18,29 @@
                 <a class="mgA createPool link" href="/demo">Demo</a>
         </div>
         <div>
-        <button class="RgButton"><a class="link" href="/register">Register</a></button>
-        <button class="LgButton"><a class="link" href="/login">Login</a></button>
+            <% if (username === "") { %>
+                <button class="RgButton"><a class="link" href="/register">Register</a></button>
+                <button class="LgButton"><a class="link" href="/login">Login</a></button>
+                <% }  else {%>
+                    <a class="name"><%= username %></a>
+                <button class="LgButton"><a class="link" href="/logout">Logout</a></button>
+                    <% } %>
         </div>
       </nav>
         <div class="wrapper">
             <div class="mainTheme">
-                <form class="votingPoll">
+                <form class="votingPoll" action="/createPool" method="post">
                     <label class="labelText labelTextTitle">Title</label>
-                    <input type="text" placeholder="write your question here" class="InputTitle labelTextAnswer">
+                    <input type="text" placeholder="write your question here" class="InputTitle labelTextAnswer" name="title">
                     <label class="labelText">Answer option</label>
                     <div class="Pools" id="pools">
                         <div class="choose" id="Parent1">
-                            <input type="text" placeholder="option 1" class="InputFirst">
+                            <input type="text" placeholder="option 1" class="InputFirst" name="option[]">
                             <img src="/img/cross-23.svg" alt="Remove" class="remove-button" style="margin-top: 2px;">
                         </div>
                         <div class="choose" id="Parent2">
-                            <input type="text" placeholder="option 2" class="Input">
-                            <img src="/img/cross-23.svg" alt="Remove" class="remove-button" style="margin-top: 5px;">
+                            <input type="text" placeholder="option 2" class="Input" name="option[]">
+                            <img src="/img/cross-23.svg" alt="Remove" class="remove-button" style="margin-top: 5px;" name="option">
                         </div>
                     </div>
                     <button class="LgButton" type="button" style="margin-top: 10px; margin-left: 20px;" id="addBtn">&#43; Add option</button>

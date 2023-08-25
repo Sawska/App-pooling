@@ -283,3 +283,7 @@ body {
     transform: translateY(-50%);
     cursor: pointer;
   }
+
+  .name {
+    margin-right: 50px;
+}

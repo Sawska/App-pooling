@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", function() {
         input.type = "text";
         input.placeholder = `option ${i}`;
         input.className = "Input";
-
+        input.name = "option[]"
+        
         let img = document.createElement("img");
         img.src = "/img/cross-23.svg";
         img.alt = "Remove";
