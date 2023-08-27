@@ -68,11 +68,16 @@ async function checkLogin(email,password) {
     return {isPassed,errText}
 }
 
+async function getId(username,email) {
+      return await dbOperationsUser.getUserId(username,email)
+}
+
 
 
 module.exports = {
     checkRegister,
     registerUser,
-    checkLogin
+    checkLogin,
+    getId
   };
   

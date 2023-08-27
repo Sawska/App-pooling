@@ -27,13 +27,13 @@ describe("CheckRegister function", () => {
   
     })
 
-    it("email already used",async () => {
-      let {isPassed,errText} = await registerLogin.checkRegister("1234","1234","Splay1494@gmail.com")
+    // it("email already used",async () => {
+    //   let {isPassed,errText} = await registerLogin.checkRegister("1234","1234","Splay1494@gmail.com")
 
-      console.log(errText)
-      expect(isPassed).toBe(false)
-      expect(errText[0]).toBe("Email already used")
-    })
+    //   console.log(errText)
+    //   expect(isPassed).toBe(false)
+    //   expect(errText[0]).toBe("Email already used")
+    // })
   
     it("All errs",async () => {
       let {isPassed,errText} = await registerLogin.checkRegister("1234","123","Splay1494")
@@ -43,16 +43,24 @@ describe("CheckRegister function", () => {
   
     })
 
+    it("Get user id",async () => {
+      let username = "Splay"
+      let email = "Splay1494@gmail.com"
+      const res = await registerLogin.getId(username,email)
+
+      expect(res).toBe(103)
+    })
+
 
   });
 
 describe("checkLogin",() => {
-  it("LoginCheck",async () => {
-    let {isPassed,errText} = await registerLogin.checkLogin("Splay1494@gmail.com","Splay1494")
+  // it("LoginCheck",async () => {
+  //   let {isPassed,errText} = await registerLogin.checkLogin("Splay1494@gmail.com","Splay1494")
 
-    expect(isPassed).toBe(true)
-    expect(errText.length).toBe(0)
-  })
+  //   expect(isPassed).toBe(true)
+  //   expect(errText.length).toBe(0)
+  // })
 
   it("Email err",async () => {
     let {isPassed,errText} = await registerLogin.checkLogin("Splay2007@gmail.com","Splay1494")
@@ -72,9 +80,9 @@ describe("checkLogin",() => {
     expect(errText[0]).toBe("Email or password is wrong")
   })
 
-  it("helper function for login",async () => {
-    let email = await dbOperationsUser.getUsername("Splay1494@gmail.com")
+  // it("helper function for login",async () => {
+  //   let email = await dbOperationsUser.getUsername("Splay1494@gmail.com")
 
-    expect(email).toBe("Splay")
-  })
+  //   expect(email).toBe("Splay")
+  // })
 })

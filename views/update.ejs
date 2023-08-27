@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap">
+    <link rel="stylesheet" href="/css/createPool.css">
+    <script src="/js/createPool.js"></script>
+    <title>Demo</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-white">
+        <div class="LogoName">
+                <img src="/img/Logo_vote.svg" class="logo">
+                <a class="Name link" href="/">Vote Up</a>
+                <a class=" mrgFirst createPool link" href="/createPool">Create Pool</a>
+                <a class="mgA createPool link" href="/demo">Demo</a>
+        </div>
+        <div>
+            <% if (username === "") { %>
+                <button class="RgButton"><a class="link" href="/register">Register</a></button>
+                <button class="LgButton"><a class="link" href="/login">Login</a></button>
+                <% }  else {%>
+                    <a class="name"><%= username %></a>
+                <button class="LgButton"><a class="link" href="/logout">Logout</a></button>
+                    <% } %>
+        </div>
+      </nav>
+        <div class="wrapper">
+            <div class="mainTheme">
+                <form class="votingPoll" action="/update/<%= item_id %>" method="post">
+                    <label class="labelText labelTextTitle">Title</label>
+                    <input type="text" placeholder="write your question here" class="InputTitle labelTextAnswer" name="title" value="<%= title %>">
+                    <label class="labelText"></label>
+                    <div class="Pools" id="pools">
+                        <div class="choose" id="Parent1">
+                            <input type="text" placeholder="option 1" class="InputFirst" name="option[]" value="<%= options[0].option_name %>">
+                            <img src="/img/cross-23.svg" alt="Remove" class="remove-button" style="margin-top: 2px;">
+                        </div>
+                        <% for( let i = 1; i < options.length; i++ ) { %>
+                                <div class="choose" id="Parent3">
+                            <input type="text" placeholder="option 2" class="Input" name="option[]" value="<%= options[i].option_name %>">
+                            <img src="/img/cross-23.svg" alt="Remove" class="remove-button" style="margin-top: 5px;" name="option">
+                        </div>
+                        <% } %>
+                    </div>
+                    <button class="LgButton" type="button" style="margin-top: 10px; margin-left: 20px;" id="addBtn">&#43; Add option</button>
+                    <button class="LgButton " type="submit" style="margin-top: 10px; margin-left: 20px; margin-bottom: 30px;">Update pool</button>
+                </form>
+            </div>
+        </div>    
+</body>
+</html>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap">
     <link rel="stylesheet" href="/css/dashboard.css">
     <title>Dashboard</title>
@@ -17,6 +17,11 @@
                 <a class="Name link" href="/">Vote Up</a>
                 <a class=" mrgFirst createPool link" href="/createPool">Create Pool</a>
                 <a class="mgA createPool link" href="/demo">Demo</a>
+                <% function formatDate(dateString) {
+                    const options = {year:"numeric",month:"long",day:"numeric"}
+                    const date = new Date(dateString)
+                    return date.toLocaleDateString(undefined,options)
+                } %>
         </div>
         <div>
             <a class="name"><%= username %></a>
@@ -26,27 +31,46 @@
       <div class="wrapper">
         <div class="mainTheme">
             <h1>Dashboard</h1>
-            <button class="LgButton"><a class="link" href="/logout">Create Pool</a></button>
+            <button class="LgButton"><a class="link" href="/createPool">Create Pool</a></button>
             <p>Polls</p>
-            <div class="secondTheme">
-                <img src="/img/pie-chart.svg" class="image">
-                <div class="text">
-                    <div class="PoolProperty"><a>Title</a></div>
-                    <div class="PoolProperty"><a class="Date">Date</a></div>
-                </div>
-                <div>
-                    <div class="dots-icon imageDots">
-                        <i class="">&#xFE19;</i>
-                        <div class="dropdown-content">
-                            <a href="#">Delete</a>
-                            <a href="#">Edit</a>
+            <% for (let i = 0; i < pools.length; i++) { %>
+                <div class="secondTheme">
+                    <img src="/img/pie-chart.svg" class="image">
+                    <div class="text">
+                        <div class="PoolProperty"><a href="/view/<%= pools[i].id %>" class="link"><%= pools[i].name %></a></div>
+                        <div class="PoolProperty"><a class="Date"><%= formatDate(pools[i].dateOfCreation) %></a></div>
+                    </div>
+                    <div>
+                        <div class="dots-icon imageDots">
+                            <i class="">&#xFE19;</i>
+                            <div class="dropdown-content">
+                                <a onclick="submitForm('<%=  pools[i].id %>')">Delete</a>
+                                <a href="/update/<%=  pools[i].id %>">Edit</a>
+                            </div>
                         </div>
                     </div>
-                    
                 </div>
-            </div>       
+            <% } %>
+            
         </div>
-
-      </div>    
 </body>
+
+<script>
+    function submitForm(poolId) {
+        const form = document.createElement('form');
+        form.action = `/deletePool/${poolId}?_method=DELETE`;
+        form.method = 'POST';
+
+        const input = document.createElement('input');
+        input.type = 'submit';
+        input.value = 'Delete';
+        input.className = 'RgButton';
+
+        form.appendChild(input);
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
+
 </html>

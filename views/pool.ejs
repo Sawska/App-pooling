@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap">
     <link rel="stylesheet" href="/css/demo.css">
     <script src="/js/demo.js"></script>
+    <script src="/js/createPool"></script>
     <title>Demo</title>
 </head>
 <body>
@@ -29,38 +30,24 @@
       </nav>
         <div class="wrapper">
             <div class="mainTheme">
-                <h1>Do you like my app</h1>
-                <h5 class="choice">Make choices:</h5>
-                <form class="votingPoll" action="/vote/1" method="post">
-                    <div class="option" id="1">
-                        <label for="option1" class="optionLabel">
-                            <input type="radio" id="option1" name="vote" class="InputRadio" name="option" value="Yes:1">
-                            <span class="CustomRadio"></span>
-                            <p class="Checkmark">Yes</p>
-                        </label>
-                    </div>
-                    <div class="option" id="2">
-                        <label for="option2" class="optionLabel">
-                            <input type="radio" id="option2" name="vote" class="InputRadio" name="option" checked value="Maybe:2">
-                            <span class="CustomRadio"></span>
-                            <p class="Checkmark">Maybe</p>
-                        </label>
-                    </div>
-                    <div class="option" id="3">
-                        <label for="option3" class="optionLabel">
-                            <input type="radio" id="option3" name="vote" class="InputRadio" name="option" value="No:3">
-                            <span class="CustomRadio"></span>
-                            <p class="Checkmark">No</p>
-                        </label>
-                    </div>
+                <h1><%= title %></h1>
+                <form class="votingPoll" action="/vote/<%= item_id %>" method="post">
+                    <% for( let i = 0; i < options.length; i++ ) { %>
+                        <div class="option" id="<%= i+1 %>">
+                            <label for="option<%= i+1 %>" class="optionLabel">
+                                <input type="radio" id="option<%= i+1 %>" name="vote" class="InputRadio" name="option" value="<%= options[i].option_name %>: <%= options[i].id %>">
+                                <span class="CustomRadio"></span>
+                                <p class="Checkmark"><%= options[i].option_name %></p>
+                            </label>
+                        </div>
+                    <% } %>
                     <h5 class="choice">Update your vote or add a new vote.</h5>
                     <div>
                         <button class="LgButton"><a class="link" type="submit">Vote</a></button>
-                        <button class="LgButton"><a href="/showResults/1" class="link">Show result</a></button>
+                        <button class="LgButton"><a href="/showResults/<%= item_id %>" class="link">Show result</a></button>
                      </div>
                 </form>
             </div>
-            
         </div>    
 </body>
 </html>

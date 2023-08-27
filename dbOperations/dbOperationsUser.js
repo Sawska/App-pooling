@@ -1,7 +1,6 @@
 const connection = require("../connect")
 const hashPassword = require("../hashPassword")
 const dotenv = require("dotenv");
-const { response } = require("../main");
 dotenv.config()
 const table = process.env.DB_TABLE_USER
 
@@ -55,11 +54,24 @@ function getUsername(email) {
     })
 }
 
+function getUserId(username,email) {
+    const pool = connection.createPool()
+
+    return new Promise((resolve,reject) => {
+        pool.query(`SELECT id FROM ${table} WHERE email = '${email}' AND username = '${username}'`,(err,response) => {
+            if(err) reject(err)
+            connection.endPool(pool)
+            resolve(response.rows[0].id)
+        })
+    })
+}
+
 
 
 module.exports = {
     checkIfEmailIsAlreadyUsed,
     registerUser,
     getUserPassword,
-    getUsername
+    getUsername,
+    getUserId
 }
