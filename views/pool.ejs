@@ -33,13 +33,23 @@
                 <h1><%= title %></h1>
                 <form class="votingPoll" action="/vote/<%= item_id %>" method="post">
                     <% for( let i = 0; i < options.length; i++ ) { %>
-                        <div class="option" id="<%= i+1 %>">
-                            <label for="option<%= i+1 %>" class="optionLabel">
-                                <input type="radio" id="option<%= i+1 %>" name="vote" class="InputRadio" name="option" value="<%= options[i].option_name %>: <%= options[i].id %>">
-                                <span class="CustomRadio"></span>
-                                <p class="Checkmark"><%= options[i].option_name %></p>
-                            </label>
-                        </div>
+                        <% if (option_id == options[i].option_name) { %>
+                            <div class="option" id="<%= i+1 %>">
+                                <label for="option<%= i+1 %>" class="optionLabel">
+                                    <input type="radio" id="option<%= i+1 %>" name="vote" class="InputRadio" name="option" value="<%= options[i].option_name %>: <%= options[i].id %>" checked>
+                                    <span class="CustomRadio"></span>
+                                    <p class="Checkmark"><%= options[i].option_name %></p>
+                                </label>
+                            </div>
+                        <% } else { %>
+                            <div class="option" id="<%= i+1 %>">
+                                <label for="option<%= i+1 %>" class="optionLabel">
+                                    <input type="radio" id="option<%= i+1 %>" name="vote" class="InputRadio" name="option" value="<%= options[i].option_name %>: <%= options[i].id %>">
+                                    <span class="CustomRadio"></span>
+                                    <p class="Checkmark"><%= options[i].option_name %></p>
+                                </label>
+                            </div>
+                            <% }%>
                     <% } %>
                     <h5 class="choice">Update your vote or add a new vote.</h5>
                     <div>

@@ -5,9 +5,39 @@ const registerLogin = require("./registerLoginErr")
 const dbOperationsUser = require("./dbOperations/dbOperationsUser")
 const poolingOperations = require("./poolingOperations");
 const session  = require("express-session")
-const methodOverride = require('method-override')
-
+const expressWs = require("express-ws")
+const methodOverride = require('method-override');
+const clients = new Set()
 const app = express();
+
+expressWs(app)
+
+app.ws('/socket', (ws, req) => {
+  clients.add(ws);
+
+  ws.on('message', async (message) => {
+      if (message.startsWith('/requestInitialData/:')) {
+          const item_id = message.split(":")[1];
+          const { poolObject, options } = await poolingOperations.getPoolProprties(item_id);
+
+          const labels = options.map(option => option.option_name);
+          const data = options.map(option => option.howmuchchoosed);
+        
+          const responseData = {
+              labels: labels,
+              data: data
+          }
+            
+          ws.send(JSON.stringify(responseData));
+      } else {
+          console.log(`Received ${message}`);
+      }
+  });
+
+  ws.on("close", () => {
+      clients.delete(ws);
+  });
+});
 
 
 
@@ -116,10 +146,16 @@ app.get("/logout", (req, res) => {
 app.post("/createPool",async (req,res) => {
   const name = req.body.title
   const options = req.body["option[]"]
-  const id = req.session.userid
-  const item_id = await poolingOperations.createPool(name,options,id)
-  const username = req.session.username
+  let item_id;
+  if(req.session.username != undefined)  {
+    const id = req.session.userid
+    item_id =  await poolingOperations.createPool(name,options,id)
+  } else {
+    item_id = await poolingOperations.createPoolAnonymous(name,options)
+  }
+  const username = req.session.username || ""
    res.render("created",{item_id,username})
+
 })
 
 app.delete("/deletePool/:id", async (req, res) => {
@@ -133,9 +169,14 @@ app.delete("/deletePool/:id", async (req, res) => {
 
 app.get("/view/:item_id", async (req, res) => {
   const item_id = req.params.item_id;
-  const username = req.session.username
+  const username = req.session.username || ""
   const { poolObject, options } = await poolingOperations.getPoolProprties(item_id);
-  res.render("pool", { title: poolObject.name, options, item_id,username });
+  const userid = req.session.userid
+  let option_id = 0
+  if(userid != undefined) {
+     option_id = await poolingOperations.seeIfUserVoted(item_id,userid)
+  }
+  res.render("pool", { title: poolObject.name, options, item_id,username,option_id });
 });
 
 
@@ -148,6 +189,10 @@ app.post("/vote/:id",async (req,res) => {
   const option_name = selectedOption[0]
   const id = selectedOption[1]
   await poolingOperations.updateHowMuch(id,item_id,option_name)
+  if(req.session.username != undefined) {
+    const userid = req.session.userid
+      await poolingOperations.saveVote(userid,item_id,id)
+  }
   res.redirect("/")
 })
 
@@ -171,6 +216,21 @@ app.post("/update/:item_id",async (req,res) => {
   res.redirect("/")
 
 })
+
+
+
+
+app.get("/showResults/:item_id", async (req, res) => {
+  const item_id = req.params.item_id;
+  const username = req.session.username;
+  const { poolObject, options } = await poolingOperations.getPoolProprties(item_id);
+  
+
+
+  res.render("showResult", { title: poolObject.name, username, item_id });
+});
+
+
 
 
 

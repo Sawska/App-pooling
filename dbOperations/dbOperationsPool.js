@@ -90,7 +90,7 @@ function deleteOption(item_id,id) {
 function deletePool(userid,id) {
     const pool = connection.createPool();
     return new Promise((resolve,reject) => {
-        pool.query(`DELETE FROM ${process.env.ITEM_OPTION_DB} WHERE item_id = ${id}; DELETE FROM ${process.env.ITEMDB} WHERE userid = ${userid} AND id = ${id}`,(err,response) => {
+        pool.query(`DELETE FROM "userChoosed" WHERE item_id = ${id}; DELETE FROM ${process.env.ITEM_OPTION_DB} WHERE item_id = ${id}; DELETE FROM ${process.env.ITEMDB} WHERE userid = ${userid} AND id = ${id};`,(err,response) => {
             if(err) reject(err)
             connection.endPool(pool);
             resolve(true)
@@ -108,6 +108,21 @@ function addPool(name, userid, dateOfCreation) {
                 if(err) reject(err);
                 connection.endPool(pool);
                 resolve(true);
+            }
+        )
+    })
+}
+
+function addPoolAnon(name,dateOfCreation) {
+    const pool = connection.createPool()
+    return new Promise((resolve,reject) => {
+        pool.query(
+            'INSERT INTO items (name,"dateOfCreation") VALUES (\$1,\$2)',
+            [name,dateOfCreation],
+            (err,response) => {
+                if(err) reject(err)
+                connection.endPool(pool)
+                resolve(true)
             }
         )
     })
@@ -132,6 +147,19 @@ function getIdOfPool(name,userid,dateOfCreation) {
     return new Promise((resolve,reject) => {
         pool.query('SELECT id FROM items WHERE name = \$1 AND userid = \$2 AND "dateOfCreation" = \$3',
         [name,userid,dateOfCreation],(err,response) => {
+            if(err) reject(err)
+            connection.endPool(pool)
+            resolve(response.rows[0].id)
+        })
+    })
+}
+
+function getIdOfPoolAnon(name,dateOfCreation) {
+    const pool = connection.createPool()
+    return new Promise((resolve,reject) => {
+        pool.query('SELECT id FROM items WHERE name = \$1 AND "dateOfCreation" = \$2',
+        [name,dateOfCreation]
+        ,(err,response) => {
             if(err) reject(err)
             connection.endPool(pool)
             resolve(response.rows[0].id)
@@ -201,6 +229,58 @@ function deleteAllOptions(item_id,userid) {
     })
 }
 
+function rememberVote(userid,item_id,option_id) {
+    const pool = connection.createPool()
+    return new Promise((resolve,reject) => {
+        pool.query('INSERT INTO "userChoosed" (userid,item_id,option_id) VALUES(\$1,\$2,\$3)',
+        [userid,item_id,option_id],
+        (err,response) => {
+            if(err) reject(err)
+            connection.endPool(pool)
+            resolve(true)
+        })
+    })
+}
+
+function deleteUserVotes(item_id) {
+    const pool = connection.createPool()
+    return new Promise((resolve,reject) => {
+        pool.query('DELETE FROM userChoosed WHERE item_id = \$1',
+        [item_id],
+        (err,response) => {
+            if(err) reject(err)
+            connection.endPool(pool)
+            resolve(true)
+        })
+    })
+}
+
+function seeIfUserVoted(item_id,userid) {
+    const pool = connection.createPool();
+    return new Promise((resolve,reject) => {
+        pool.query('SELECT option_id FROM "userChoosed" WHERE item_id = \$1 AND userid = \$2',
+        [item_id,userid],
+        (err,response) => {
+            if(err) reject(err)
+            connection.endPool(pool)
+            resolve(response.rows)
+        })
+    })
+}
+
+function deleteVote(item_id,userid) {
+    const pool = connection.createPool();
+    return new Promise((resolve,reject) => {
+        pool.query('DELETE FROM "userChoosed" WHERE item_id = \$1 AND userid = \$2',
+        [item_id,userid], 
+        (err,response) => {
+            if(err) reject(err)
+            connection.endPool(pool)
+            resolve(true)
+        })
+    })
+}
+
 module.exports = {
     getAllUserPools,
     getAllOptions,
@@ -217,5 +297,11 @@ module.exports = {
     getPoolProtected,
     getOptionProtected,
     deleteAllOptions,
-    updateDateOfCreation
+    updateDateOfCreation,
+    addPoolAnon,
+    getIdOfPoolAnon,
+    rememberVote,
+    deleteUserVotes,
+    seeIfUserVoted,
+    deleteVote
 }

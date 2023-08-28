@@ -32,4 +32,37 @@ describe("Pooling Operations",() => {
     //     expect(res).toBe(true)
     // })
 
+    // it("createPoolAnonymous function", async () => {
+    //     const option = ["test1","test2"]
+    //     const res = await poolingOperations.createPoolAnonymous("title",option)
+
+    //     expect(isNaN(res)).toBe(false)
+    // })
+
+    // it("saveVote function", async () => {
+    //     const id = 103
+    //     const item_id = 142
+    //     const option_id  = 230
+    //     const res = await poolingOperations.saveVote(id,item_id,option_id)
+
+    //     expect(res).toBe(true)
+    // })
+
+    // it("seeIfUserVoted",async () => {
+    //     const userid = 103
+    //     const item_id = 142
+    //     const res = await poolingOperations.seeIfUserVoted(item_id,userid)
+
+    //     expect(res).toBe(230)
+    // })
+
+    // it("seeIfUserVoted false",async () => {
+    //     const userid = 234
+    //     const item_id = 344
+    //     const res = await poolingOperations.seeIfUserVoted(item_id,userid)
+
+    //     expect(res).toBe(false)
+    // })
+
+
 })

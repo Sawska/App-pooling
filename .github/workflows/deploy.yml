@@ -11,17 +11,25 @@ jobs:
 
     services:
       postgres:
-        image: postgres:latest
+        image: postgres:13
         env:
-          DB_HOST: localhost
-          DB_PORT:  3006
-          DB_USER: postgres
-          DB_PASSWORD: AlexLinov
-          DB: PoolingObjects
-          DB_TABLE: PoolingObjects
-          DB_TABLE_USER: users
+          DB_HOST: "localhost"
+          DB_PORT: 3006
+          DB_USER: "postgres"
+          DB_PASSWORD: "AlexLinov"
+          DB: "PoolingObjects"
+          DB_TABLE: "PoolingObjects"
+          DB_TABLE_USER: "users"
+          SECRET: "LizokSanya2407"
+          ITEM_OPTION_DB: "item_options"
+          ITEMDB: "items"
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
         ports:
-          - "3006:3006"  # Map container port to host port
+          - "3006:3006" 
 
     steps:
     - name: Checkout Repository
