@@ -11,7 +11,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres:13
+        image: postgres:latest
         env:
           DB_HOST: "localhost"
           DB_PORT: 3006
