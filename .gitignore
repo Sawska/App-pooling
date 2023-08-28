@@ -1,2 +1,4 @@
 node_modules
 package-lock.json
+/test/registerLoginErr.test.js
+/test/poolingOperations.test.js
